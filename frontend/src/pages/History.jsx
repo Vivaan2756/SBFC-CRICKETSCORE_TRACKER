@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
- 
+// This tells Vite: Use the Render variable if it exists, otherwise use localhost for development
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
+
 const History = () => {
   const navigate = useNavigate();
   const [matches, setMatches] = useState([]);
@@ -11,7 +14,7 @@ const History = () => {
   const fetchMatches = async () => {
     setError(null);
     try {
-      const resp = await axios.get('http://localhost:8000/api/matches/');
+      const resp = await axios.get(`${API_URL}/api/matches/`);
       const completed = (resp.data || []).filter(m => m.status === 'COMPLETED');
       setMatches(completed.reverse());
     } catch {

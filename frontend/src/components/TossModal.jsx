@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 const TossModal = ({ match, onUpdate }) => {
   const [winner, setWinner] = useState(match.team_a);
@@ -9,7 +10,7 @@ const TossModal = ({ match, onUpdate }) => {
   const handleToss = async () => {
     setLoading(true);
     try {
-      await axios.post(`http://localhost:8000/api/matches/${match.id}/toss/`, {
+      await axios.post(`${API_URL}/api/matches/${match.id}/toss/`, {
         winner_id: winner,
         decision: decision
       });

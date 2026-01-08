@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+// This tells Vite: Use the Render variable if it exists, otherwise use localhost for development
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
+
 
 const MatchConfig = () => {
   const { format } = useParams();
@@ -85,7 +89,7 @@ const MatchConfig = () => {
         }
       };
 
-      const response = await axios.post('http://localhost:8000/api/matches/', payload);
+      const response = await axios.post(`${API_URL}/api/matches/`, payload);
       navigate(`/match/${response.data.id}`);
     } catch (err) {
       setError("Failed to create match. Please try again.");

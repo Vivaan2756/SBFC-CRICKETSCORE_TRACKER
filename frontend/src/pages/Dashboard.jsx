@@ -4,6 +4,10 @@ import axios from 'axios';
 import TossModal from '../components/TossModal';
 import Scoreboard from '../components/Scoreboard';
 import MatchSummary from '../components/MatchSummary';
+// This tells Vite: Use the Render variable if it exists, otherwise use localhost for development
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
+
+
 
 const Dashboard = () => {
   const { id } = useParams();
@@ -13,7 +17,7 @@ const Dashboard = () => {
 
   const fetchMatch = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/matches/${id}/`);
+      const response = await axios.get(`${API_URL}/api/matches/${id}/`);
       setMatch(response.data);
     } catch (error) {
       console.error("Error fetching match:", error);

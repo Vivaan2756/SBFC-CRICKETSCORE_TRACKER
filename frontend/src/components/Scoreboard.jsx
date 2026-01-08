@@ -3,6 +3,7 @@ import BattingCard from './BattingCard';
 import BowlingCard from './BowlingCard';
 import ControlPanel from './ControlPanel';
 import axios from 'axios';
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 const Scoreboard = ({ match, onUpdate }) => {
   const currentInnings = match.innings.find(i => !i.is_completed) || match.innings[match.innings.length - 1];
@@ -83,7 +84,7 @@ const Scoreboard = ({ match, onUpdate }) => {
       payload.over_number = Math.floor(legalBalls / 6);
       payload.ball_number = (legalBalls % 6) + 1;
 
-      await axios.post(`http://localhost:8000/api/matches/${match.id}/bowl/`, payload);
+      await axios.post(`${API_URL}/api/matches/${match.id}/bowl/`, payload);
       
       // --- WICKET HANDLING ---
       if (payload.is_wicket) {
@@ -164,7 +165,7 @@ const Scoreboard = ({ match, onUpdate }) => {
   
   const handleUndo = async () => {
     try {
-      await axios.post(`http://localhost:8000/api/matches/${match.id}/undo/`);
+      await axios.post(`${API_URL}/api/matches/${match.id}/undo/`);
       setShowEndOfOver(false);
       setShowFire(false);
       setShowHattrick(false);
