@@ -1,11 +1,11 @@
 import os
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# Recommendation: Set this as an environment variable in Render dashboard
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure--&*=uncf=z&2l+h40@$wbbdw_)peo-zmirre^w()1&j!*cr_hh')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -46,7 +46,7 @@ MIDDLEWARE = [
 # CORS Configuration
 CORS_ALLOW_ALL_ORIGINS = DEBUG  # True in development, False in production
 CORS_ALLOWED_ORIGINS = [
-    "https://frontend.onrender.com", # Your React App URL
+    "https://frontend.onrender.com", # Replace with your actual React App URL
 ]
 
 ROOT_URLCONF = 'cricket_backend.urls'
@@ -68,19 +68,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cricket_backend.wsgi.application'
 
-# Database Configuration for SQLite on Render Persistent Disk
-if 'RENDER' in os.environ:
-    # This path is where Render mounts your persistent disk
-    db_path = Path('/opt/render/project/src/data/db.sqlite3')
-else:
-    # Local development path
-    db_path = BASE_DIR / 'db.sqlite3'
-
+# Database Configuration
+# This uses the DATABASE_URL environment variable (PostgreSQL) on Render 
+# and defaults to local SQLite if DATABASE_URL is not found.
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': db_path,
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL', f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
+        conn_max_age=600
+    )
 }
 
 # Password validation
@@ -101,7 +96,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# WhiteNoise storage optimization (compression and long-term caching)
+# WhiteNoise storage optimization
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
