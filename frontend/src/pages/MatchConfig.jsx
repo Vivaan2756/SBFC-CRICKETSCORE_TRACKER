@@ -102,7 +102,7 @@ const MatchConfig = () => {
   return (
     <div className="min-h-screen bg-black p-4 md:p-6 flex flex-col items-center text-white overflow-x-hidden">
       <div className="w-full max-w-6xl bg-white/5 backdrop-blur-lg rounded-2xl md:rounded-3xl p-4 md:p-8 shadow-2xl border border-white/10">
-        
+
         {/* Header */}
         <div className="flex justify-between items-center mb-6 md:mb-8 border-b border-white/20 pb-3 md:pb-4">
           <button onClick={() => navigate(-1)} className="px-3 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-sm font-bold">
@@ -113,22 +113,22 @@ const MatchConfig = () => {
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-4">
                 <label className="font-semibold">Overs:</label>
-                <input 
-                  type="number" 
-                  value={config.customOvers} 
-                  onChange={(e) => setConfig({...config, customOvers: parseInt(e.target.value)})}
+                <input
+                  type="number"
+                  value={config.customOvers}
+                  onChange={(e) => setConfig({ ...config, customOvers: parseInt(e.target.value) })}
                   className="bg-black/30 text-white rounded px-3 py-1 w-16 md:w-20 text-center border border-white/30 focus:border-white/60"
                 />
               </div>
-              <div className="flex items-center gap-2">
-                <input 
-                  type="checkbox" 
+              <label className="flex items-center gap-2 cursor-pointer py-2 active:opacity-70">
+                <input
+                  type="checkbox"
                   checked={config.lastManStanding}
-                  onChange={(e) => setConfig({...config, lastManStanding: e.target.checked})}
-                  className="w-5 h-5 accent-white"
+                  onChange={(e) => setConfig({ ...config, lastManStanding: e.target.checked })}
+                  className="w-5 h-5 accent-blue-500 rounded" // Using a colored accent helps visibility
                 />
-                <span className="font-semibold">Last Man Standing</span>
-              </div>
+                <span className="font-semibold select-none">Last Man Standing</span>
+              </label>
             </div>
           )}
         </div>
@@ -140,28 +140,28 @@ const MatchConfig = () => {
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          
+
           {/* Team A Section */}
           <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
             <h2 className="text-xl font-bold mb-4 text-white">Team A</h2>
-            <input 
-              type="text" 
-              placeholder="Team Name" 
+            <input
+              type="text"
+              placeholder="Team Name"
               className="w-full bg-black/30 rounded-lg px-4 py-2 mb-4 border border-white/20 focus:outline-none focus:border-white/60 text-white"
               value={config.teamA.name}
-              onChange={(e) => setConfig({...config, teamA: {...config.teamA, name: e.target.value}})}
+              onChange={(e) => setConfig({ ...config, teamA: { ...config.teamA, name: e.target.value } })}
             />
-            
+
             <div className="flex gap-2 mb-4">
-              <input 
-                type="text" 
-                placeholder="Add Player" 
+              <input
+                type="text"
+                placeholder="Add Player"
                 className="flex-1 bg-black/30 rounded-lg px-4 py-2 border border-white/20 text-white"
                 value={newPlayerA}
                 onChange={(e) => setNewPlayerA(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && addPlayer('teamA', newPlayerA, setNewPlayerA)}
               />
-              <button 
+              <button
                 onClick={() => addPlayer('teamA', newPlayerA, setNewPlayerA)}
                 className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg font-bold text-white border border-white/20 transition"
               >
@@ -178,7 +178,7 @@ const MatchConfig = () => {
                     {player.is_captain && <span className="text-yellow-400 text-xs font-bold border border-yellow-400 px-1 rounded">C</span>}
                   </div>
                   <div className="flex gap-2">
-                    <button 
+                    <button
                       onClick={() => toggleCaptain('teamA', idx)}
                       className={`text-xs px-2 py-1 rounded ${player.is_captain ? 'bg-yellow-600' : 'bg-gray-600 hover:bg-gray-500'}`}
                     >
@@ -196,24 +196,24 @@ const MatchConfig = () => {
           {/* Team B Section */}
           <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
             <h2 className="text-xl font-bold mb-4 text-white">Team B</h2>
-            <input 
-              type="text" 
-              placeholder="Team Name" 
+            <input
+              type="text"
+              placeholder="Team Name"
               className="w-full bg-black/30 rounded-lg px-4 py-2 mb-4 border border-white/20 focus:outline-none focus:border-white/60 text-white"
               value={config.teamB.name}
-              onChange={(e) => setConfig({...config, teamB: {...config.teamB, name: e.target.value}})}
+              onChange={(e) => setConfig({ ...config, teamB: { ...config.teamB, name: e.target.value } })}
             />
-            
+
             <div className="flex gap-2 mb-4">
-              <input 
-                type="text" 
-                placeholder="Add Player" 
+              <input
+                type="text"
+                placeholder="Add Player"
                 className="flex-1 bg-black/30 rounded-lg px-4 py-2 border border-white/20 text-white"
                 value={newPlayerB}
                 onChange={(e) => setNewPlayerB(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && addPlayer('teamB', newPlayerB, setNewPlayerB)}
               />
-              <button 
+              <button
                 onClick={() => addPlayer('teamB', newPlayerB, setNewPlayerB)}
                 className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg font-bold text-white border border-white/20 transition"
               >
@@ -230,7 +230,7 @@ const MatchConfig = () => {
                     {player.is_captain && <span className="text-yellow-400 text-xs font-bold border border-yellow-400 px-1 rounded">C</span>}
                   </div>
                   <div className="flex gap-2">
-                    <button 
+                    <button
                       onClick={() => toggleCaptain('teamB', idx)}
                       className={`text-xs px-2 py-1 rounded ${player.is_captain ? 'bg-yellow-600' : 'bg-gray-600 hover:bg-gray-500'}`}
                     >
@@ -248,7 +248,7 @@ const MatchConfig = () => {
         </div>
 
         <div className="mt-8 flex justify-center">
-          <button 
+          <button
             onClick={handleSubmit}
             disabled={loading}
             className="bg-white text-black font-bold text-xl px-12 py-3 rounded-full hover:scale-105 transition-transform disabled:opacity-50 disabled:hover:scale-100 shadow-xl"
