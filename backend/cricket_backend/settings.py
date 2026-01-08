@@ -13,7 +13,7 @@ DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 # Allow Render domains and local development
 ALLOWED_HOSTS = [
-    'cricket-backend.onrender.com', # Replace with your actual Render service URL
+    'cricket-backend-abfo.onrender.com',  # Updated to your actual URL
     'localhost',
     '127.0.0.1'
 ]
@@ -46,7 +46,7 @@ MIDDLEWARE = [
 # CORS Configuration
 CORS_ALLOW_ALL_ORIGINS = DEBUG  # True in development, False in production
 CORS_ALLOWED_ORIGINS = [
-    "https://frontend.onrender.com", # Replace with your actual React App URL
+    "https://cricket-frontend.onrender.com", # Replace with your actual frontend URL
 ]
 
 ROOT_URLCONF = 'cricket_backend.urls'
