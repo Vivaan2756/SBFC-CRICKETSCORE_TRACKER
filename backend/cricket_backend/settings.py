@@ -13,11 +13,10 @@ DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 # Allow Render domains and local development
 ALLOWED_HOSTS = [
-    'cricket-backend-abfo.onrender.com',  # Updated to your actual URL
+    'cricket-backend-abfo.onrender.com',
     'localhost',
     '127.0.0.1'
 ]
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -46,9 +45,13 @@ MIDDLEWARE = [
 # CORS Configuration
 CORS_ALLOW_ALL_ORIGINS = DEBUG  # True in development, False in production
 CORS_ALLOWED_ORIGINS = [
-    "https://cricket-frontend.onrender.com", # Replace with your actual frontend URL
+    "https://cricket-frontend-i8u5.onrender.com",  # The specific one from your error
+    "https://cricket-frontend.onrender.com",       # The generic one
 ]
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://cricket-frontend-i8u5.onrender.com",
+    "https://cricket-frontend.onrender.com",
+]
 ROOT_URLCONF = 'cricket_backend.urls'
 
 TEMPLATES = [
